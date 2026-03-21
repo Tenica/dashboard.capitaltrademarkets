@@ -155,10 +155,14 @@ function UserWallets() {
        list = investments.filter(i => (i.pendingConfirmation?.invoice?.user?._id || i.userId || i.user?._id) === filterUserId);
     }
 
-    return list.filter(i => 
-      (i.pendingConfirmation?.invoice?.plan?.name || i.planName || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (i.status || '').toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const search = searchTerm.toLowerCase();
+    return list.filter(i => {
+      const planName = (i.pendingConfirmation?.invoice?.plan?.name || i.planName || '').toLowerCase();
+      const status = (i.status || '').toLowerCase();
+      const userName = `${i.pendingConfirmation?.invoice?.user?.firstName || i.user?.firstName || ''} ${i.pendingConfirmation?.invoice?.user?.lastName || i.user?.lastName || ''}`.toLowerCase();
+      
+      return planName.includes(search) || status.includes(search) || userName.includes(search);
+    });
   };
 
   // Pagination Logic
@@ -460,11 +464,11 @@ function UserWallets() {
                 <thead>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--border-color)' }}>
                     {isAdmin && !filterUserId && <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Investor</th>}
+                    <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Plan Name</th>
                     <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Action Date</th>
                     <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Principal</th>
                     <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Duration</th>
                     <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>ROI Range</th>
-                    <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Next Pay Date</th>
                     <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Reference</th>
                   </tr>
                 </thead>
@@ -485,6 +489,9 @@ function UserWallets() {
                             {owner?.firstName} {owner?.lastName}
                           </td>
                         )}
+                        <td data-label="Plan Name" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                           {plan?.name || inv.planName || 'Standard Plan'}
+                        </td>
                         <td data-label="Action Date" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)' }}>
                           <div style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
                             {new Date(pConf?.updatedAt || inv.updatedAt).toLocaleDateString()}
@@ -502,13 +509,6 @@ function UserWallets() {
                             {plan ? `${plan.dailyProfitMin}% - ${plan.dailyProfitMax}%` : 'Standard'}
                           </span>
                           <div style={{fontSize: '0.72rem', color: 'var(--text-secondary)'}}>Daily Accrual</div>
-                        </td>
-                        <td data-label="Next Pay Date" style={{ padding: '1.25rem 1.5rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#10b981', fontWeight: '600' }}>
-                            <Clock size={14} />
-                            {nextPay.toLocaleDateString()}
-                          </div>
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Estimated</div>
                         </td>
                         <td data-label="Reference" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'monospace' }}>
                           {inv._id?.slice(-8).toUpperCase()}
