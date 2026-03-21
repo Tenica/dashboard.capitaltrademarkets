@@ -102,6 +102,16 @@ function Login() {
             <h2 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Two-Factor Auth</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>Enter the 6-digit code from your authenticator app</p>
             
+            {error && requires2Fa && (
+              <div className="error-message" style={{ 
+                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem', 
+                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem', 
+                border: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem'
+              }}>
+                <Lock size={16} /> {error}
+              </div>
+            )}
+
             <form onSubmit={handle2FaSubmit}>
               <div className="form-group" style={{ marginBottom: '2rem' }}>
                 <input
@@ -139,6 +149,17 @@ function Login() {
 
             <h2 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Welcome Back</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>Secure access to your wealth portfolio</p>
+
+            {error && !requires2Fa && (
+              <div className="error-message" style={{ 
+                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem', 
+                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem', 
+                border: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem'
+              }}>
+                <Lock size={16} /> {error}
+              </div>
+            )}
+
 
             <form onSubmit={handleSubmit}>
               <div className="form-group" style={{ marginBottom: '1.25rem' }}>
