@@ -45,6 +45,10 @@ function Withdrawals() {
       const wRes = await withdrawalAPI.viewAllWithdrawals();
       let wData = wRes.data?.withdrawals || wRes.data?.message || [];
       
+      if (!Array.isArray(wData)) {
+        wData = [];
+      }
+      
       if (!isAdmin) {
         wData = wData.filter(i => i.userId === user?._id || i.user === user?._id || i.email === user?.email);
         // Also fetch investments for eligibility
