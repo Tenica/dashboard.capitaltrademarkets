@@ -153,7 +153,7 @@ function Withdrawals() {
 
   if (loading) {
     return (
-      <div className="dashboard-page flex-center-center" style={{ minHeight: '50vh' }}>
+      <div className="dashboard-page flex-center-center" style={{ minHeight: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="spinner"></div>
       </div>
     );
