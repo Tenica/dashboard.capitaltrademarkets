@@ -131,7 +131,7 @@ function Register() {
 
   return (
     <div className="auth-container" style={{ animation: 'fadeIn 0.6s ease-out' }}>
-      <div className="auth-card glass" style={{ maxWidth: '580px', width: '95%', padding: '2.5rem' }}>
+      <div className="auth-card glass" style={{ maxWidth: '620px', width: '95%', padding: '2.5rem' }}>
         <div className="logo" style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
           <img src="/logo.png" alt="Logo" style={{ maxWidth: '220px', width: '100%', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }} />
         </div>
@@ -151,7 +151,7 @@ function Register() {
         )}
 
         <form onSubmit={handleSubmit} noValidate>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.25rem' }}>
+          <div className="auth-grid">
             <div className="form-group">
               <label style={labelStyle}>First Name</label>
               <div style={{ position: 'relative' }}>
@@ -168,7 +168,7 @@ function Register() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1rem', marginBottom: '1.25rem' }}>
+          <div className="auth-grid-uneven">
             <div className="form-group">
               <label style={labelStyle}>Email Address</label>
               <div style={{ position: 'relative' }}>
@@ -188,7 +188,7 @@ function Register() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '0.5rem' }}>
+          <div className="auth-grid">
             <div className="form-group">
               <label style={labelStyle}>Password</label>
               <div style={{ position: 'relative' }}>

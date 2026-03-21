@@ -416,6 +416,29 @@ tbody tr:hover {
   text-decoration: underline;
 }
 
+/* Auth Form Grid System */
+.auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth-grid-uneven {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .auth-grid, 
+  .auth-grid-uneven {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+}
+
 /* Loading Spinner */
 .loading {
   display: flex;
