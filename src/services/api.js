@@ -87,6 +87,7 @@ export const pendingConfirmationAPI = {
   viewUserPendingCredit: () => api.get('/pending-confirmation/view-all-user-pending-confirmation'),
   viewUserPendingWithdrawal: (id) => api.get(`/pending-confirmation/view-all-user-withdrawal-confirmation/${id}`),
   confirmPendingTransaction: (id) => api.post(`/pending-confirmation/confirm-pending-confirmation/${id}`),
+  getGrowthData: () => api.get('/history/growth-data'),
 };
 
 // System Wallet APIs

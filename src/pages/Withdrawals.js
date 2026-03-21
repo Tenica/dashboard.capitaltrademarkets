@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { 
   ArrowUpRight, CheckCircle, Clock, XCircle, Wallet, 
   Lock, Unlock, ShieldAlert, ChevronRight, Filter, 
-  Search, ShieldCheck, Zap, AlertCircle, TrendingUp, History 
+  Search, ShieldCheck, Zap, AlertCircle, TrendingUp, History, Inbox
 } from 'lucide-react';
 import '../styles/dashboard.css';
+import EmptyState from '../components/common/EmptyState';
 
 const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 
@@ -165,17 +166,6 @@ function Withdrawals() {
   const historyWithdrawals = withdrawals.filter(w => w.status?.toLowerCase() !== 'pending');
 
   const renderTableRows = (data, isHistory = false) => {
-    if (data.length === 0) {
-      return (
-        <tr>
-          <td colSpan="6" style={{ textAlign: 'center', padding: '5rem', color: 'var(--text-secondary)' }}>
-            <ShieldAlert size={48} style={{ opacity: 0.1, marginBottom: '1rem' }} />
-            <p style={{ margin: 0, fontSize: '0.9rem' }}>No data records to display.</p>
-          </td>
-        </tr>
-      );
-    }
-
     return data.map((w) => (
       <tr 
         key={w._id} 
@@ -379,8 +369,8 @@ function Withdrawals() {
           <h2 className="panel-title" style={{ fontSize: '1.2rem', margin: 0 }}>{isAdmin ? 'Global Withdrawal Requests' : 'My Withdrawal Requests'}</h2>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="premium-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
-            {pendingWithdrawals.length > 0 && (
+          {pendingWithdrawals.length > 0 ? (
+            <table className="premium-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--border-color)' }}>
                   <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>{isAdmin ? 'Investor' : 'Reference'}</th>
@@ -391,11 +381,19 @@ function Withdrawals() {
                   <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
-            )}
-            <tbody>
-              {renderTableRows(pendingWithdrawals, false)}
-            </tbody>
-          </table>
+              <tbody>
+                {renderTableRows(pendingWithdrawals, false)}
+              </tbody>
+            </table>
+          ) : (
+            <div style={{ padding: '2rem' }}>
+              <EmptyState 
+                icon={Inbox} 
+                title="No Pending Requests" 
+                message={isAdmin ? "No system-wide withdrawal requests awaiting approval." : "You don't have any pending withdrawal requests."} 
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -409,8 +407,8 @@ function Withdrawals() {
           </p>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="premium-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
-            {historyWithdrawals.length > 0 && (
+          {historyWithdrawals.length > 0 ? (
+            <table className="premium-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--border-color)' }}>
                   <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>{isAdmin ? 'Investor' : 'Reference'}</th>
@@ -421,11 +419,19 @@ function Withdrawals() {
                   <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
-            )}
-            <tbody>
-              {renderTableRows(historyWithdrawals, true)}
-            </tbody>
-          </table>
+              <tbody>
+                {renderTableRows(historyWithdrawals, true)}
+              </tbody>
+            </table>
+          ) : (
+            <div style={{ padding: '2rem' }}>
+              <EmptyState 
+                icon={History} 
+                title="No History Found" 
+                message={isAdmin ? "No historical records of withdrawals in the system." : "Your completed withdrawal history will appear here."} 
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

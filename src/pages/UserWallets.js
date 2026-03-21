@@ -4,9 +4,10 @@ import Pagination from '../components/common/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AdminContext } from '../components/layout/Layout';
-import { Activity, Wallet, TrendingUp, Users, Search, CheckCircle, Clock, Plus, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
+import { Activity, Wallet, TrendingUp, Users, Search, CheckCircle, Clock, Plus, ArrowUpRight, ArrowDownRight, Minus, Inbox, SearchX, History as HistoryIcon } from 'lucide-react';
 import InvestmentModal from '../components/dashboard/InvestmentModal';
 import '../styles/dashboard.css';
+import EmptyState from '../components/common/EmptyState';
 
 function UserWallets() {
   const { user } = useAuth();
@@ -300,10 +301,15 @@ function UserWallets() {
               getFilteredAdminView().length === 0 ? (
                 <tbody>
                   <tr>
-                    <td colSpan="5" style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                      <Users size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} />
-                      <h3 style={{ fontSize: '1.2rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>No Data Available</h3>
-                      <p style={{ margin: 0 }}>Try adjusting your search or filter.</p>
+                    <td colSpan="5" style={{ padding: '0' }}>
+                      <div style={{ padding: '3rem' }}>
+                        <EmptyState 
+                          icon={searchTerm ? SearchX : Users} 
+                          title={searchTerm ? "No users found" : "User Registry is empty"} 
+                          message={searchTerm ? `We couldn't find any wallets matching "${searchTerm}".` : "New investor accounts will automatically appear here once provisioned."}
+                          action={searchTerm ? { label: 'Clear Search', onClick: () => setSearchTerm('') } : null}
+                        />
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -359,13 +365,15 @@ function UserWallets() {
               getFilteredUserInvestments().length === 0 ? (
                 <tbody>
                   <tr>
-                    <td colSpan="5" style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                      <Activity size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} />
-                      <h3 style={{ fontSize: '1.2rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>No Active Plans</h3>
-                      <p style={{ margin: '0 0 1.5rem 0' }}>Launch your first investment today.</p>
-                      <button className="btn btn-primary" onClick={() => navigate('/plans')}>
-                        Browse Plans
-                      </button>
+                    <td colSpan="5" style={{ padding: '0' }}>
+                      <div style={{ padding: '3.5rem' }}>
+                        <EmptyState 
+                          icon={Activity} 
+                          title="Portfolio is empty" 
+                          message="You haven't launched any capital plans yet. Browse our verified investment strategies to begin."
+                          action={{ label: 'Browse Plans', onClick: () => navigate('/plans') }}
+                        />
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -436,8 +444,14 @@ function UserWallets() {
             {getFilteredUserInvestments().length === 0 ? (
               <tbody>
                 <tr>
-                  <td colSpan={isAdmin && !filterUserId ? "7" : "6"} style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    No transaction history found for this view.
+                  <td colSpan="7" style={{ padding: '0' }}>
+                    <div style={{ padding: '3rem' }}>
+                      <EmptyState 
+                        icon={HistoryIcon} 
+                        title="No credit history" 
+                        message="Verified funding and investment approval logs will be archived here."
+                      />
+                    </div>
                   </td>
                 </tr>
               </tbody>

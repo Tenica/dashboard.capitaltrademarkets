@@ -53,6 +53,7 @@ function Register() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState({});
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -78,6 +79,9 @@ function Register() {
 
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.country || !formData.password) {
       setError('Please fill in all mandatory fields.'); return;
+    }
+    if (!acceptedTerms) {
+      setError('You must accept the Terms of Use to continue.'); return;
     }
     if (!validateEmail(formData.email)) {
       setError('Please enter a valid email address.'); return;
@@ -193,7 +197,7 @@ function Register() {
               <label style={labelStyle}>Password</label>
               <div style={{ position: 'relative' }}>
                 <span style={iconStyle('password')}><Lock size={18} /></span>
-                <input type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} onBlur={handleBlur} placeholder="Min. 8 char" style={{ ...inputStyle('password'), paddingRight: '2.5rem' }} />
+                <input type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password" style={{ ...inputStyle('password'), paddingRight: '2.5rem' }} />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}>
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -203,7 +207,7 @@ function Register() {
               <label style={labelStyle}>Confirm Password</label>
               <div style={{ position: 'relative' }}>
                 <span style={iconStyle('confirmPassword')}><Lock size={18} /></span>
-                <input type={showConfirm ? 'text' : 'password'} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} onBlur={handleBlur} placeholder="Repeat it" style={{ ...inputStyle('confirmPassword'), paddingRight: '2.5rem', border: `1.5px solid ${passwordsMismatch ? '#ef4444' : 'var(--border-color)'}` }} />
+                <input type={showConfirm ? 'text' : 'password'} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} onBlur={handleBlur} placeholder="Repeat password" style={{ ...inputStyle('confirmPassword'), paddingRight: '2.5rem', border: `1.5px solid ${passwordsMismatch ? '#ef4444' : 'var(--border-color)'}` }} />
                 <button type="button" onClick={() => setShowConfirm(!showConfirm)} style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}>
                   {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -230,9 +234,28 @@ function Register() {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxShadow: '0 8px 24px rgba(99, 102, 241, 0.2)', cursor: loading || success ? 'not-allowed' : 'pointer' }} disabled={loading || !!success}>
+          <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+               <input 
+                 type="checkbox" 
+                 id="terms"
+                 checked={acceptedTerms}
+                 onChange={(e) => setAcceptedTerms(e.target.checked)}
+                 style={{ 
+                   width: '18px', height: '18px', cursor: 'pointer',
+                   accentColor: 'var(--accent-primary)',
+                   borderRadius: '4px'
+                 }} 
+               />
+            </div>
+            <label htmlFor="terms" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer', lineHeight: '1.4' }}>
+              I have read and agree to the <Link to="/terms" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Capital Trade Markets Terms of Use</Link> and acknowledge the trading risks involved.
+            </label>
+          </div>
+
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxShadow: '0 8px 24px rgba(99, 102, 241, 0.2)', cursor: loading || success || !acceptedTerms ? 'not-allowed' : 'pointer', opacity: !acceptedTerms ? 0.6 : 1 }} disabled={loading || !!success || !acceptedTerms}>
              {loading ? <Loader2 size={20} className="spinner" /> : null}
-             {loading ? 'Processing Elite Account...' : '🚀 Create Your Strategy'}
+             {loading ? 'Processing Account...' : 'Create Account'}
           </button>
         </form>
 

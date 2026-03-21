@@ -147,8 +147,7 @@ function Login() {
               />
             </div>
 
-            <h2 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Welcome Back</h2>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>Secure access to your wealth portfolio</p>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Welcome Back</h2>
 
             {error && !requires2Fa && (
               <div className="error-message" style={{ 

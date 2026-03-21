@@ -288,7 +288,7 @@ function Plans() {
                 </div>
                 
                 <div style={{ marginBottom: '2rem', background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                   <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Minimum Invest</div>
+                   <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Minimum investment</div>
                    <div style={{ fontSize: '2.4rem', fontWeight: '800', color: 'var(--accent-primary)', display: 'flex', alignItems: 'flex-start' }}>
                       <span style={{ fontSize: '1.2rem', marginTop: '0.5rem', marginRight: '2px' }}>$</span>
                       {(parseFloat(plan.minimum) || 0).toLocaleString()}

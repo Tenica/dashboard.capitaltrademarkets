@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { transactionAPI } from '../services/api';
 import Pagination from '../components/common/Pagination';
 import { useAuth } from '../context/AuthContext';
-import { TrendingUp, ArrowDownRight, ArrowUpRight, Search, Clock, CheckCircle } from 'lucide-react';
+import { TrendingUp, ArrowDownRight, ArrowUpRight, Search, Clock, CheckCircle, SearchX, History } from 'lucide-react';
 import '../styles/dashboard.css';
+import EmptyState from '../components/common/EmptyState';
 
 function Transactions() {
   const { user } = useAuth();
@@ -120,8 +121,8 @@ function Transactions() {
         </div>
 
         <div style={{ overflowX: 'auto' }}>
-          <table className="premium-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
-            {filteredTxns.length > 0 && (
+          {filteredTxns.length > 0 ? (
+            <table className="premium-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
               <thead>
                 <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--border-color)' }}>
                   {isAdmin && <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Investor</th>}
@@ -131,16 +132,8 @@ function Transactions() {
                   <th style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '0.85rem', textTransform: 'uppercase' }}>Date</th>
                 </tr>
               </thead>
-            )}
-            <tbody>
-              {filteredTxns.length === 0 ? (
-                <tr>
-                  <td colSpan={isAdmin ? "5" : "4"} style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    No transaction records matching your search.
-                  </td>
-                </tr>
-              ) : (
-                currentItems.map((txn) => {
+              <tbody>
+                {currentItems.map((txn) => {
                   const isROI = txn.description?.startsWith('Daily ROI');
                   
                   return (
@@ -176,10 +169,19 @@ function Transactions() {
                       </td>
                     </tr>
                   );
-                })
-              )}
-            </tbody>
-          </table>
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div style={{ padding: '3rem' }}>
+              <EmptyState 
+                icon={searchTerm ? SearchX : History} 
+                title={searchTerm ? "No matching records" : "No history found"} 
+                message={searchTerm ? `We couldn't find any transactions matching "${searchTerm}".` : "Your financial activity and ROI earnings will appear here."}
+                action={searchTerm ? { label: 'Clear Search', onClick: () => setSearchTerm('') } : null}
+              />
+            </div>
+          )}
         </div>
         <Pagination 
           currentPage={currentPage}

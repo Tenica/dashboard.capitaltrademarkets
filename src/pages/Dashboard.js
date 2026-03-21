@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [selectedPlan, setSelectedPlan] = useState('');
   const [investAmount, setInvestAmount] = useState('');
   const [formMessage, setFormMessage] = useState({ type: '', text: '' });
+  const [chartData, setChartData] = useState([]);
   const [realStats, setRealStats] = useState({
     walletBalance: 0, totalProfit: 0,
     pendingCredits: 0, pendingWithdrawals: 0,
@@ -111,8 +112,18 @@ const Dashboard = () => {
             pendingWithdrawals: withdrawals.length,
           }));
         } catch (e) {
-          // leave default zeros
+          console.error('User stats error:', e);
         }
+      }
+
+      // Fetch chart data separately to ensure main stats load even if chart fails
+      try {
+        const historyRes = await pendingConfirmationAPI.getGrowthData();
+        if (historyRes.data?.chartData) {
+          setChartData(historyRes.data.chartData);
+        }
+      } catch (err) {
+        console.error('History fetch error:', err);
       }
     } catch (error) {
       console.error('Dashboard fetch error:', error);
@@ -214,7 +225,7 @@ const Dashboard = () => {
       <div className="dashboard-header">
         <div>
           <h1>{getGreeting()}, {user?.firstName ? user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase() : (isAdmin ? 'Admin' : 'Investor')}!</h1>
-          <p>Here's what's happening with your {isAdmin ? 'platform' : 'portfolio'} today.</p>
+          <p>Here is an overview of your portfolio</p>
         </div>
         <button 
           className="btn btn-primary glass" 
@@ -254,7 +265,7 @@ const Dashboard = () => {
             <h2 className="panel-title">{isAdmin ? 'Platform Revenue Growth' : 'Portfolio Growth'}</h2>
             <button className="icon-btn"><Activity size={18} /></button>
           </div>
-          <DashboardChart isAdmin={isAdmin} />
+          <DashboardChart isAdmin={isAdmin} chartData={chartData} />
         </div>
 
         <div className="dashboard-panel">

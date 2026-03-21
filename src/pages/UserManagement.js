@@ -6,9 +6,10 @@ import { useAuth } from '../context/AuthContext';
 import Pagination from '../components/common/Pagination';
 import {
   Search, Shield, User, Mail, Globe, Calendar,
-  X, Wallet, ChevronRight, Lock, Unlock, Users, Filter, History, Zap, CheckCircle, UserPlus
+  X, Wallet, ChevronRight, Lock, Unlock, Users, Filter, History, Zap, CheckCircle, UserPlus, SearchX
 } from 'lucide-react';
 import '../styles/dashboard.css';
+import EmptyState from '../components/common/EmptyState';
 
 const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 
@@ -703,9 +704,15 @@ function UserManagement() {
               </tr>
             ) : filteredUsers.length === 0 ? (
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
-                  <Users size={40} style={{ opacity: 0.2, marginBottom: '1rem' }} />
-                  <p>No matching users found.</p>
+                <td colSpan="5" style={{ padding: '0' }}>
+                  <div style={{ padding: '3rem' }}>
+                    <EmptyState 
+                      icon={SearchX} 
+                      title="No matching users found" 
+                      message={searchTerm ? `We couldn't find any users matching "${searchTerm}". Try adjusting your search.` : "No users match the active filter criteria."}
+                      action={searchTerm ? { label: 'Clear Search', onClick: () => setSearchTerm('') } : null}
+                    />
+                  </div>
                 </td>
               </tr>
             ) : (

@@ -19,6 +19,7 @@ import CreateInvestment from './pages/CreateInvestment';
 import Transactions from './pages/Transactions';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Terms from './pages/Terms';
 import './styles/App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           

@@ -6,9 +6,10 @@ import { useAuth } from '../context/AuthContext';
 import { 
   ArrowDownLeft, ArrowUpRight, Clock, CheckCircle, XCircle, 
   User, Mail, Globe, Wallet, ExternalLink, X, ChevronRight,
-  Filter, Calendar, Search, ShieldCheck, AlertCircle
+  Filter, Calendar, Search, ShieldCheck, AlertCircle, Inbox
 } from 'lucide-react';
 import '../styles/dashboard.css';
+import EmptyState from '../components/common/EmptyState';
 
 const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 
@@ -386,9 +387,14 @@ function PendingConfirmations() {
               <tr><td colSpan="6" style={{ textAlign: 'center', padding: '5rem' }}><div className="spinner"></div></td></tr>
             ) : filteredStream.length === 0 ? (
               <tr>
-                <td colSpan="6" style={{ textAlign: 'center', padding: '5rem', color: 'var(--text-secondary)' }}>
-                  <Clock size={48} style={{ opacity: 0.1, marginBottom: '1rem' }} />
-                  <p>The confirmation queue is currently empty.</p>
+                <td colSpan="6" style={{ padding: '0' }}>
+                  <div style={{ padding: '3rem' }}>
+                    <EmptyState 
+                      icon={Inbox} 
+                      title="Confirmation queue empty" 
+                      message={searchTerm ? `No pending transactions match your search for "${searchTerm}".` : "There are currently no pending deposits or withdrawals awaiting verification."} 
+                    />
+                  </div>
                 </td>
               </tr>
             ) : (
