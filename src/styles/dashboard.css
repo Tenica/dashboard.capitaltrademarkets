@@ -451,3 +451,73 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
+
+/* Mobile Responsive Tables */
+@media (max-width: 768px) {
+  .premium-table thead {
+    display: none;
+  }
+  
+  .premium-table, .premium-table tbody, .premium-table tr, .premium-table td {
+    display: block;
+    width: 100%;
+  }
+  
+  .premium-table tr {
+    margin-bottom: 1.25rem;
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem 0;
+  }
+  
+  .premium-table td {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+  }
+  
+  .premium-table td:last-child {
+    border-bottom: none;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-bottom: 0.85rem;
+    background: rgba(0,0,0,0.02);
+  }
+  
+  .premium-table td[data-label]::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-align: left;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .premium-table td[colspan] {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .premium-table td[colspan]::before {
+    display: none;
+  }
+  
+  .premium-table-container {
+    background: transparent;
+    border: none;
+  }
+  
+  /* Reset padding from inline styles since they override CSS */
+  .premium-table td[style] {
+    padding: 0.85rem 1.25rem !important;
+  }
+}

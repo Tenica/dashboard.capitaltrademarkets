@@ -397,10 +397,10 @@ function PendingConfirmations() {
                 const u = isDeposit ? item.invoice?.user : item.userId;
                 return (
                   <tr key={item._id} onClick={() => openDrawer(item, item._type)} style={{ cursor: 'pointer' }}>
-                    <td>
+                    <td data-label="Investor & Reference">
                       <div className="type-indicator">
                         <div style={{
-                          width: '36px', height: '36px', borderRadius: '50%',
+                          width: '36px', height: '36px', borderRadius: '50%', flexShrink: 0,
                           background: isDeposit ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                           color: isDeposit ? '#10b981' : '#f59e0b',
@@ -408,15 +408,15 @@ function PendingConfirmations() {
                         }}>
                           {capitalize(u?.firstName)?.[0] || 'U'}
                         </div>
-                        <div>
-                          <div style={{ fontWeight: '700', color: 'var(--text-primary)' }}>
+                        <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column' }}>
+                          <span style={{ fontWeight: '700', color: 'var(--text-primary)' }}>
                             {capitalize(u?.firstName)} {capitalize(u?.lastName)}
-                          </div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Ref: {item._id.slice(-8)}</div>
+                          </span>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Ref: {item._id.slice(-8)}</span>
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Type">
                       <span style={{ 
                         fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px',
                         color: isDeposit ? '#10b981' : '#f59e0b',
@@ -426,21 +426,21 @@ function PendingConfirmations() {
                         {item._type}
                       </span>
                     </td>
-                    <td style={{ fontWeight: '800', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                    <td data-label="Amount" style={{ fontWeight: '800', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
                       ${Number(item.amount || item.invoice?.amount || 0).toLocaleString()}
                     </td>
-                    <td>
+                    <td data-label="Status">
                       <span className="status-badge pending">
                         <Clock size={12} /> Pending
                       </span>
                     </td>
-                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                    <td data-label="Created At" style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Calendar size={14} />
                         {new Date(item.createdAt).toLocaleDateString()}
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Actions">
                       <div className="table-actions" style={{ justifyContent: 'flex-end' }}>
                         <button className="btn-table glass" style={{ padding: '0.4rem', borderRadius: '8px' }}>
                           <ChevronRight size={18} />

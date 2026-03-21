@@ -190,7 +190,7 @@ function Withdrawals() {
         onMouseEnter={(e) => { if(isAdmin && isHistory) e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.05)'; }}
         onMouseLeave={(e) => { if(isAdmin && isHistory) e.currentTarget.style.backgroundColor = 'transparent'; }}
       >
-        <td style={{ padding: '1.25rem 1.5rem' }}>
+        <td data-label={isAdmin ? 'Investor' : 'Reference'} style={{ padding: '1.25rem 1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)',
@@ -198,7 +198,7 @@ function Withdrawals() {
             }}>
               <ArrowUpRight size={14} />
             </div>
-            <div>
+            <div style={{ textAlign: 'right' }}>
               <div style={{ fontWeight: '700', color: 'var(--text-primary)' }}>
                 {isAdmin ? (capitalize(w.userId?.firstName || w.user?.firstName || 'Investor')) : `#${w._id.slice(-8).toUpperCase()}`}
               </div>
@@ -206,21 +206,21 @@ function Withdrawals() {
             </div>
           </div>
         </td>
-        <td style={{ padding: '1.25rem 1.5rem' }}>
+        <td data-label="Destination" style={{ padding: '1.25rem 1.5rem' }}>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>
             {w.walletAddress ? `${w.walletAddress.slice(0, 12)}...` : 'N/A'}
           </div>
         </td>
-        <td style={{ padding: '1.25rem 1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+        <td data-label="Amount" style={{ padding: '1.25rem 1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
           {formatMoney(w.amount)}
         </td>
-        <td style={{ padding: '1.25rem 1.5rem' }}>
+        <td data-label="Status" style={{ padding: '1.25rem 1.5rem' }}>
           <StatusBadge status={w.status} />
         </td>
-        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+        <td data-label={isHistory ? 'Processed On' : 'Submitted'} style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
           {new Date(w.createdAt).toLocaleDateString()}
         </td>
-        <td style={{ padding: '1.25rem 1.5rem', textAlign: 'right' }}>
+        <td data-label="Actions" style={{ padding: '1.25rem 1.5rem', textAlign: 'right' }}>
           {isAdmin && w.status?.toLowerCase() === 'pending' ? (
             <div className="table-actions" style={{ justifyContent: 'flex-end', position: 'relative', zIndex: 2 }}>
               <button 
