@@ -76,7 +76,7 @@ export const investmentAPI = {
   viewAllInvestments: () => api.get('/investment/view-all-investments'),
   viewUserInvestments: () => api.get('/investment/view-user-investments'),
   updateAllInvestments: () => api.get('/investment/update-investment'),
-  updateUserInvestment: (userId) => api.get(`/investment/update-investment/${userId}?force=true`),
+  updateUserInvestment: (userId, force = false) => api.get(`/investment/update-investment/${userId}${force ? '?force=true' : ''}`),
 };
 
 // Pending Confirmation APIs

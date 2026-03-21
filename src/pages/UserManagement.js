@@ -69,6 +69,7 @@ function UserManagement() {
   const [payoutUser, setPayoutUser] = useState(null); // User currently selected for payout
   const [confirmEmail, setConfirmEmail] = useState('');
   const [payoutLoading, setPayoutLoading] = useState(false);
+  const [forcePayout, setForcePayout] = useState(false);
   
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
@@ -146,7 +147,7 @@ function UserManagement() {
 
     setPayoutLoading(true);
     try {
-      const res = await investmentAPI.updateUserInvestment(payoutUser._id);
+      const res = await investmentAPI.updateUserInvestment(payoutUser._id, forcePayout);
       const count = res.data?.processedCount || 0;
       
       setMessage({ 
@@ -157,6 +158,7 @@ function UserManagement() {
       });
       setPayoutUser(null);
       setConfirmEmail('');
+      setForcePayout(false);
     } catch (err) {
       setMessage({ type: 'error', text: 'Payout failed. Please check system logs.' });
     } finally {
@@ -420,10 +422,24 @@ function UserManagement() {
                 />
               </div>
 
+              <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', background: forcePayout ? 'rgba(245, 158, 11, 0.1)' : 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: forcePayout ? '1px solid rgba(245, 158, 11, 0.2)' : '1px solid rgba(255,255,255,0.05)', transition: 'all 0.2s' }}>
+                <input 
+                  type="checkbox" 
+                  id="forcePayoutToggle"
+                  checked={forcePayout}
+                  onChange={(e) => setForcePayout(e.target.checked)}
+                  style={{ width: '18px', height: '18px', accentColor: '#f59e0b', cursor: 'pointer' }}
+                />
+                <label htmlFor="forcePayoutToggle" style={{ fontSize: '0.85rem', color: forcePayout ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer', lineHeight: '1.4', flex: 1 }}>
+                  <strong style={{ color: forcePayout ? '#f59e0b' : 'var(--text-primary)', display: 'block', marginBottom: '0.1rem', transition: 'color 0.2s' }}>Force Immediate Payout</strong>
+                  Bypass the strict 24-hour chronological lock and inject ROI instantly.
+                </label>
+              </div>
+
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <button 
                   type="button"
-                  onClick={() => { setPayoutUser(null); setConfirmEmail(''); }}
+                  onClick={() => { setPayoutUser(null); setConfirmEmail(''); setForcePayout(false); }}
                   style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', fontWeight: '600', cursor: 'pointer' }}
                 >
                   Cancel
