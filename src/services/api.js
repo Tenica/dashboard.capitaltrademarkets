@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://capitaltrademarket.vercel.app'; // Uses environment variable or falls back to production target
+const API_BASE_URL = process.env.REACT_APP_API_URL || '';
 
 // Create axios instance with default config
 const api = axios.create({
@@ -10,7 +10,7 @@ const api = axios.create({
   },
 });
 
-// Add token to requests if available
+// Request interceptor for adding auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -22,11 +22,17 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor to handle logout on 401
+// Response interceptor for handling 401s
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    // Only logout on specific 401 messages that indicate unauthenticated state
+    const isAuthError = error.response?.status === 401 &&
+      (error.response?.data?.error === 'Please authenticate.' ||
+       error.response?.data?.message === 'Unauthorized' ||
+       !localStorage.getItem('user'));
+
+    if (isAuthError) {
       // Clear storage
       localStorage.removeItem('token');
       localStorage.removeItem('user');

@@ -13,19 +13,37 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on mount
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
+    // Check if user is logged in on mount - Recover state atomically
+    const syncAuthState = () => {
+      try {
+        const storedToken = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
 
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
+        if (storedToken && storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          if (parsedUser && parsedUser._id) {
+            setToken(storedToken);
+            setUser(parsedUser);
+          } else {
+            // Corrupted user data
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+          }
+        }
+      } catch (err) {
+        console.error("Auth sync error:", err);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    syncAuthState();
   }, []);
 
   const login = async (email, password) => {
