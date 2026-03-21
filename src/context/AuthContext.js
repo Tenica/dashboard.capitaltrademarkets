@@ -30,7 +30,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await authAPI.login(email, password);
+      const normalizedEmail = email.trim().toLowerCase();
+      const response = await authAPI.login(normalizedEmail, password);
       
       if (response.data.require2Fa) {
         return { success: true, require2Fa: true, userId: response.data.userId };
