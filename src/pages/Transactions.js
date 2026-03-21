@@ -139,12 +139,12 @@ function Transactions() {
                   return (
                     <tr key={txn._id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                       {isAdmin && (
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                        <td data-label="Investor" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
                           {txn.user ? `${txn.user.firstName} ${txn.user.lastName}` : 'System'}
                         </td>
                       )}
-                      <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '500' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <td data-label="Description" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '500' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'flex-end' }}>
                           <div style={{ 
                             padding: '0.4rem', borderRadius: '8px', 
                             background: isROI ? 'rgba(34, 197, 94, 0.1)' : 'rgba(255,255,255,0.05)',
@@ -155,16 +155,16 @@ function Transactions() {
                           {txn.description}
                         </div>
                       </td>
-                      <td style={{ padding: '1.25rem 1.5rem' }}>
+                      <td data-label="Amount" style={{ padding: '1.25rem 1.5rem' }}>
                         {formatAmount(txn.amount, txn.description)}
                       </td>
-                      <td style={{ padding: '1.25rem 1.5rem' }}>
+                      <td data-label="Label" style={{ padding: '1.25rem 1.5rem' }}>
                         <span className={`status-badge ${isROI ? 'active' : 'completed'}`} style={{ fontSize: '0.75rem', padding: '0.3rem 0.8rem' }}>
                           {isROI ? 'Profit' : (txn.type || 'Transaction')}
                         </span>
                       </td>
-                      <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        {new Date(txn.createdAt).toLocaleDateString()}
+                      <td data-label="Date" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                        <div>{new Date(txn.createdAt).toLocaleDateString()}</div>
                         <div style={{ fontSize: '0.7rem', opacity: 0.6 }}>{new Date(txn.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                       </td>
                     </tr>

@@ -452,72 +452,73 @@
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-/* Mobile Responsive Tables */
+/* Mobile Responsive Tables Overhaul */
 @media (max-width: 768px) {
+  .premium-table {
+    display: block !important;
+    min-width: 100% !important;
+  }
+
   .premium-table thead {
-    display: none;
+    display: none !important;
   }
   
-  .premium-table, .premium-table tbody, .premium-table tr, .premium-table td {
-    display: block;
-    width: 100%;
+  .premium-table tbody {
+    display: block !important;
+    width: 100% !important;
   }
-  
+
   .premium-table tr {
-    margin-bottom: 1.25rem;
-    background: var(--bg-secondary);
-    border-radius: 14px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    padding: 0.5rem 0;
+    display: block !important;
+    margin-bottom: 1.5rem !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(8px) !important;
+    padding: 0.5rem 0 !important;
   }
   
   .premium-table td {
-    border: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.85rem 1.25rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: right;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem 1.5rem !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    text-align: right !important;
+    min-height: 4.5rem !important;
   }
   
   .premium-table td:last-child {
-    border-bottom: none;
-    justify-content: space-between;
-    margin-top: 0;
-    padding-bottom: 0.85rem;
-    background: rgba(0,0,0,0.02);
+    border-bottom: none !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
   }
   
   .premium-table td[data-label]::before {
-    content: attr(data-label);
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-align: left;
-    margin-right: 1rem;
-    flex-shrink: 0;
+    content: attr(data-label) !important;
+    font-size: 0.7rem !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-align: left !important;
+    margin-right: 1.5rem !important;
+    flex-shrink: 0 !important;
   }
   
-  .premium-table td[colspan] {
-    justify-content: center;
-    text-align: center;
+  /* Handle elements with icons or complex flex items in mobile view */
+  .premium-table td > div,
+  .premium-table td > span {
+    justify-content: flex-end !important;
+    text-align: right !important;
   }
-  
-  .premium-table td[colspan]::before {
-    display: none;
-  }
-  
-  .premium-table-container {
-    background: transparent;
-    border: none;
-  }
-  
-  /* Reset padding from inline styles since they override CSS */
-  .premium-table td[style] {
-    padding: 0.85rem 1.25rem !important;
+
+  /* Reset any inline table widths */
+  .dashboard-panel div[style*="overflow-x: auto"] {
+    overflow-x: visible !important;
   }
 }

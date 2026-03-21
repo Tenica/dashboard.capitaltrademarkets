@@ -185,7 +185,7 @@ function Withdrawals() {
         onMouseLeave={(e) => { if(isAdmin && isHistory) e.currentTarget.style.backgroundColor = 'transparent'; }}
       >
         <td data-label={isAdmin ? 'Investor' : 'Reference'} style={{ padding: '1.25rem 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'flex-end' }}>
             <div style={{
               width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)'

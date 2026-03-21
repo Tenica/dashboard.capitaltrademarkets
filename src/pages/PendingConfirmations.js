@@ -426,7 +426,7 @@ function PendingConfirmations() {
                       <span style={{ 
                         fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px',
                         color: isDeposit ? '#10b981' : '#f59e0b',
-                        display: 'flex', alignItems: 'center', gap: '5px'
+                        display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'flex-end'
                       }}>
                         {isDeposit ? <ArrowDownLeft size={14} /> : <ArrowUpRight size={14} />}
                         {item._type}
@@ -441,7 +441,7 @@ function PendingConfirmations() {
                       </span>
                     </td>
                     <td data-label="Created At" style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'flex-end' }}>
                         <Calendar size={14} />
                         {new Date(item.createdAt).toLocaleDateString()}
                       </div>

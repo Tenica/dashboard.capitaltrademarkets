@@ -718,7 +718,7 @@ function UserManagement() {
             ) : (
               currentItems.map((u) => (
                 <tr key={u._id} onClick={() => openDrawer(u)} style={{ cursor: 'pointer' }}>
-                  <td>
+                  <td data-label="Customer">
                     <div className="type-indicator">
                       <div style={{
                         width: '40px', height: '40px', borderRadius: '50%',
@@ -729,8 +729,8 @@ function UserManagement() {
                       }}>
                         {u.firstName[0]}{u.lastName[0]}
                       </div>
-                      <div style={{ minWidth: 0 }}>
-                        <div style={{ fontWeight: '600', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ minWidth: 0, textAlign: 'right' }}>
+                        <div style={{ fontWeight: '600', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'flex-end' }}>
                           {capitalize(u.firstName)} {capitalize(u.lastName)}
                           {u.isAdmin && <Shield size={12} className="text-accent" />}
                         </div>
@@ -738,22 +738,22 @@ function UserManagement() {
                       </div>
                     </div>
                   </td>
-                  <td className="um-col-hide-mobile">
+                  <td data-label="Contact" className="um-col-hide-mobile">
                     <div style={{ fontSize: '0.85rem' }}>{u.email}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'flex-end' }}>
                       <Globe size={11} /> {capitalize(u.country) || 'Unknown'}
                     </div>
                   </td>
-                  <td className="um-col-hide-sm" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  <td data-label="Join Date" className="um-col-hide-sm" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                     {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}
                   </td>
-                  <td>
+                  <td data-label="Status">
                     <span className={`status-badge ${u.isBlocked ? 'cancelled' : 'approved'}`}>
                       {u.isBlocked ? <Lock size={12} /> : <Unlock size={12} />} {u.isBlocked ? 'Blocked' : 'Active'}
                     </span>
                   </td>
-                  <td>
-                    <div className="table-actions">
+                  <td data-label="Actions">
+                    <div className="table-actions" style={{ justifyContent: 'flex-end' }}>
                       {!u.isAdmin && (
                         <>
                           <button

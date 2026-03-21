@@ -370,24 +370,24 @@ const Dashboard = () => {
               <tbody>
                 {pendingActions.map((action, idx) => (
                   <tr key={idx}>
-                    <td>
+                    <td data-label="Type">
                       <div className="type-indicator">
                         <i>{action.type === 'deposit' ? <ArrowDownLeft size={16} className="text-success" /> : <ArrowUpRight size={16} className="text-warning" />}</i>
                         <span>{action.type === 'deposit' ? 'Credit' : 'Withdrawal'}</span>
                       </div>
                     </td>
-                    {isAdmin && <td style={{ color: 'var(--text-primary)' }}>{action.user}</td>}
-                    {!isAdmin && <td style={{ color: 'var(--text-primary)', fontSize: '0.85rem' }}>{action.desc}</td>}
-                    <td style={{ fontWeight: '700', color: 'var(--text-primary)' }}>{action.amount}</td>
-                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{action.time}</td>
-                    <td>
+                    {isAdmin && <td data-label="User" style={{ color: 'var(--text-primary)' }}>{action.user}</td>}
+                    {!isAdmin && <td data-label="Description" style={{ color: 'var(--text-primary)', fontSize: '0.85rem' }}>{action.desc}</td>}
+                    <td data-label="Amount" style={{ fontWeight: '700', color: 'var(--text-primary)' }}>{action.amount}</td>
+                    <td data-label="Date" style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{action.time}</td>
+                    <td data-label="Status">
                       <span className={`status-badge ${action.status === 'Pending' ? 'pending' : (action.status === 'Approved' ? 'approved' : 'cancelled')}`}>
                         <Clock size={12} /> {action.status}
                       </span>
                     </td>
                     {isAdmin && (
-                      <td>
-                        <div className="table-actions">
+                      <td data-label="Actions">
+                        <div className="table-actions" style={{ justifyContent: 'flex-end' }}>
                           <button
                             className="btn-table btn-table-approve"
                             onClick={() => handleApprove(action.actionId, action.type)}

@@ -333,26 +333,26 @@ function UserWallets() {
                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.05)'} 
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                       >
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <td data-label="Investor" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <div className="avatar" style={{ width: '32px', height: '32px', fontSize: '0.85rem' }}>
                             {row.owner?.firstName?.[0] || 'U'}
                           </div>
                           {row.owner?.firstName} {row.owner?.lastName}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                        <td data-label="Contact" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                           {row.owner?.email || 'N/A'}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700', fontSize: '1rem' }}>
+                        <td data-label="Wallet Balance" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700', fontSize: '1rem' }}>
                            <span style={{ color: parseFloat(row.currencyAmount) > 0 ? 'var(--success)' : 'inherit' }}>
                              {formatMoney(row.currencyAmount)}
                            </span>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem' }}>
+                        <td data-label="Active Plans" style={{ padding: '1.25rem 1.5rem' }}>
                           <span className={`status-badge ${row.activeCount > 0 ? 'active' : 'pending'}`} style={{fontSize: '0.75rem'}}>
                             {row.activeCount} Active
                           </span>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                        <td data-label="Total Vol." style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
                            {formatMoney(row.investedSum)}
                         </td>
                       </tr>
@@ -391,13 +391,13 @@ function UserWallets() {
                   <tbody>
                     {getPaginatedList(getFilteredUserInvestments(), regPage).map((inv) => (
                       <tr key={inv._id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                        <td data-label="Capital Plan" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
                           {inv.pendingConfirmation?.invoice?.plan?.name || inv.planName || 'Active Plan'}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700' }}>
+                        <td data-label="Principal" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700' }}>
                            {formatMoney(inv.pendingConfirmation?.invoice?.amount || inv.amount)}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem' }}>
+                        <td data-label="Profit Earned" style={{ padding: '1.25rem 1.5rem' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success)', fontWeight: '600' }}>
                             +{formatMoney(inv.totalProfit || inv.profit)}
                             <div style={{ color: inv.profitTrend === 'gain' ? '#10b981' : inv.profitTrend === 'loss' ? '#ef4444' : '#94a3b8' }}>
@@ -405,10 +405,10 @@ function UserWallets() {
                             </div>
                           </div>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                        <td data-label="Start Date" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                           {new Date(inv.investmentDate || inv.createdAt).toLocaleDateString()}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem' }}>
+                        <td data-label="Status" style={{ padding: '1.25rem 1.5rem' }}>
                           <span className={`status-badge ${(!inv.completed) ? 'active' : 'completed'}`} style={{fontSize: '0.75rem'}}>
                             {(!inv.completed) ? <CheckCircle size={12} /> : <Clock size={12} />}
                             {(!inv.completed) ? 'Active' : 'Completed'}
@@ -481,36 +481,36 @@ function UserWallets() {
                     return (
                       <tr key={inv._id + '_hist'} style={{ borderBottom: '1px solid var(--border-color)' }}>
                         {isAdmin && !filterUserId && (
-                          <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                          <td data-label="Investor" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
                             {owner?.firstName} {owner?.lastName}
                           </td>
                         )}
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)' }}>
+                        <td data-label="Action Date" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)' }}>
                           <div style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
                             {new Date(pConf?.updatedAt || inv.updatedAt).toLocaleDateString()}
                           </div>
                           <div style={{ fontSize: '0.7rem' }}>Approved</div>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700' }}>
+                        <td data-label="Principal" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '700' }}>
                           {formatMoney(invoice?.amount || inv.amount)}
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)' }}>
+                        <td data-label="Duration" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)' }}>
                            {plan?.endDate || 'Unlimited'} Days
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem' }}>
+                        <td data-label="ROI Range" style={{ padding: '1.25rem 1.5rem' }}>
                           <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>
                             {plan ? `${plan.dailyProfitMin}% - ${plan.dailyProfitMax}%` : 'Standard'}
                           </span>
                           <div style={{fontSize: '0.72rem', color: 'var(--text-secondary)'}}>Daily Accrual</div>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem' }}>
+                        <td data-label="Next Pay Date" style={{ padding: '1.25rem 1.5rem' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#10b981', fontWeight: '600' }}>
                             <Clock size={14} />
                             {nextPay.toLocaleDateString()}
                           </div>
                           <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Estimated</div>
                         </td>
-                        <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'monospace' }}>
+                        <td data-label="Reference" style={{ padding: '1.25rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'monospace' }}>
                           {inv._id?.slice(-8).toUpperCase()}
                         </td>
                       </tr>
