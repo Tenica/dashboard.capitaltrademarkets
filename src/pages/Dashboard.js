@@ -238,8 +238,8 @@ const Dashboard = () => {
               <ShieldAlert size={20} />
             </div>
             <div>
-              <h4 style={{ margin: '0 0 0.2rem', color: '#f8fafc', fontSize: '0.95rem' }}>Protect Your Account</h4>
-              <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.85rem' }}>Set up Two-Factor Authentication (2FA) for elite security.</p>
+              <h4 style={{ margin: '0 0 0.2rem', color: 'var(--text-primary)', fontSize: '0.95rem' }}>Protect Your Account</h4>
+              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Set up Two-Factor Authentication (2FA) for elite security.</p>
             </div>
           </div>
           <a href="/profile?tab=security" style={{ background: 'var(--accent-gradient)', padding: '0.6rem 1.25rem', borderRadius: '8px', color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem', whiteSpace: 'nowrap' }}>
