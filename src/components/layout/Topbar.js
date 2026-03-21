@@ -33,7 +33,7 @@ const Topbar = ({ toggleSidebar, isAdmin, setIsAdmin }) => {
       </div>
 
       <div className="topbar-right">
-        {user?.isAdmin && (
+        {user?.role === 'admin' && (
           <button 
             className="icon-btn mock-role-btn" 
             onClick={() => setIsAdmin(!isAdmin)}
