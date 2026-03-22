@@ -41,8 +41,18 @@ function UserWallets() {
       if (targetWallet) {
         setSearchTerm(`${targetWallet.owner?.firstName || ''} ${targetWallet.owner?.lastName || ''}`);
       }
+    } else if (!filterUserId && searchTerm) {
+      // If user manually cleared the search, we don't force anything
     }
   }, [filterUserId, loading, wallets]);
+
+  const handleSearchChange = (val) => {
+    setSearchTerm(val);
+    if (!val && filterUserId) {
+      // Clear the query param if search is emptied
+      navigate('/user-wallets', { replace: true });
+    }
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -138,12 +148,17 @@ function UserWallets() {
       });
       
       const investedSum = userInv.reduce((sum, i) => sum + parseFloat(i.pendingConfirmation?.invoice?.amount || i.amount || 0), 0);
-      const activeCount = userInv.filter(i => i.status?.toLowerCase() === 'active' || !i.completed).length;
+      const activeInvs = userInv.filter(i => i.status?.toLowerCase() === 'active' || !i.completed);
+      const activeCount = activeInvs.length;
+      
+      // Get unique plan names for display
+      const activePlanNames = [...new Set(activeInvs.map(i => i.pendingConfirmation?.invoice?.plan?.name || i.planName))].filter(Boolean);
 
       return {
         ...wallet,
         investedSum,
         activeCount,
+        activePlanNames,
         totalInvCount: userInv.length
       };
     });
@@ -281,21 +296,29 @@ function UserWallets() {
         <div className="panel-header" style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color)', display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center' }}>
            <h2 className="panel-title" style={{ margin: 0 }}>{isAdmin ? 'User Registry & Balances' : 'My Active Subscriptions'}</h2>
            
-           <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
-             <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
-             <input
-                type="text"
-                placeholder={isAdmin ? "Search by name or email..." : "Filter your plans..."}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{
-                  width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem',
-                  borderRadius: '20px', border: '1px solid var(--border-color)',
-                  background: 'var(--bg-secondary)', color: 'var(--text-primary)',
-                  outline: 'none', transition: 'border-color 0.3s'
-                }}
-             />
-           </div>
+            <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
+              <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
+              <input
+                 type="text"
+                 placeholder={isAdmin ? "Search by name or email..." : "Filter your plans..."}
+                 value={searchTerm}
+                 onChange={(e) => handleSearchChange(e.target.value)}
+                 style={{
+                   width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem',
+                   borderRadius: '20px', border: '1px solid var(--border-color)',
+                   background: 'var(--bg-secondary)', color: 'var(--text-primary)',
+                   outline: 'none', transition: 'border-color 0.3s'
+                 }}
+              />
+              {filterUserId && (
+                <button 
+                  onClick={() => handleSearchChange('')}
+                  style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                  CLEAR
+                </button>
+              )}
+            </div>
         </div>
         
         <div style={{ overflowX: 'auto' }}>
@@ -352,9 +375,19 @@ function UserWallets() {
                            </span>
                         </td>
                         <td data-label="Active Plans" style={{ padding: '1.25rem 1.5rem' }}>
-                          <span className={`status-badge ${row.activeCount > 0 ? 'active' : 'pending'}`} style={{fontSize: '0.75rem'}}>
-                            {row.activeCount} Active
-                          </span>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                            {row.activePlanNames?.length > 0 ? (
+                              row.activePlanNames.map((name, i) => (
+                                <span key={i} className="status-badge active" style={{ fontSize: '0.7rem', whiteSpace: 'nowrap' }}>
+                                  {name}
+                                </span>
+                              ))
+                            ) : (
+                              <span className="status-badge pending" style={{ fontSize: '0.7rem' }}>
+                                No Active Plans
+                              </span>
+                            )}
+                          </div>
                         </td>
                         <td data-label="Total Vol." style={{ padding: '1.25rem 1.5rem', color: 'var(--text-primary)', fontWeight: '600' }}>
                            {formatMoney(row.investedSum)}
