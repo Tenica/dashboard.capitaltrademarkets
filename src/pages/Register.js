@@ -140,7 +140,7 @@ function Register() {
           <img src="/logo.png" alt="Logo" style={{ maxWidth: '220px', width: '100%', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }} />
         </div>
 
-        <h2 style={{ color: 'var(--text-primary)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Portfolio Registration</h2>
+        <h2 style={{ color: 'var(--text-primary)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Create your portfolio</h2>
 
         {error && (
           <div className="error-message" style={{ backgroundColor: 'rgba(239,68,68,0.1)', color: '#ef4444', padding: '0.75rem', borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem', border: '1px solid rgba(239,68,68,0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

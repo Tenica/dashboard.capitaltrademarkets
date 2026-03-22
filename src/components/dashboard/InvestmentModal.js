@@ -473,10 +473,10 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                   </div>
 
                   {/* Warning */}
-                  <div style={{ display: 'flex', gap: '0.6rem', padding: '0.8rem', background: 'rgba(234,179,8,0.07)', border: '1px solid rgba(234,179,8,0.18)', borderRadius: '10px', marginBottom: '1.25rem' }}>
-                    <AlertCircle size={15} color="#eab308" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
-                      <strong style={{ color: '#eab308' }}>Important:</strong> Only submit after depositing the funds. Providing false transaction details may result in your account being blocked.
+                  <div style={{ display: 'flex', gap: '0.8rem', padding: '1rem', background: 'rgba(234,179,8,0.06)', border: '1px solid rgba(234,179,8,0.15)', borderRadius: '12px', marginBottom: '1.5rem' }}>
+                    <AlertCircle size={18} color="#eab308" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <p style={{ margin: 0, fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>
+                      <strong style={{ color: '#eab308' }}>Important:</strong> Submit only after completing the deposit. Submission of false or misleading information may result in account restriction or suspension in line with our policies.
                     </p>
                   </div>
 
@@ -490,13 +490,14 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                       style={{
                         flex: 2, padding: '0.9rem', borderRadius: '12px',
                         background: '#10b981', color: 'white',
-                        display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
-                        border: 'none', fontSize: '0.95rem', fontWeight: '700',
-                        cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.7 : 1
+                        display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.6rem',
+                        border: 'none', fontSize: '1rem', fontWeight: '700',
+                        cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.7 : 1,
+                        boxShadow: '0 8px 20px rgba(16,185,129,0.25)'
                       }}>
                       {isProcessing
-                        ? <><Loader2 size={17} style={{ animation: 'spin 1s linear infinite' }} /> Submitting...</>
-                        : <><Send size={16} /> Submit for Approval</>}
+                        ? <><Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} /> Submitting...</>
+                        : <><Send size={18} /> Submit for Approval</>}
                     </button>
                   </div>
                 </div>
