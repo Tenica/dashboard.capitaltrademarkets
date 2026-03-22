@@ -109,7 +109,7 @@ function Terms() {
             </div>
             
             <div className="legal-block">
-              <p><strong>1. Capital Trade Markets</strong> refers to an ecosystem comprising Capital Trade Markets websites (whose domain names include but are not limited to https://www.capitaltrademarkets.com), clients, applets and other tools that are developed to offer Capital Trade Markets Services, and includes independently-operated platforms, websites and clients within the ecosystem.</p>
+              <p><strong>1. Capital Trade Markets</strong> refers to an ecosystem comprising Capital Trade Markets websites (whose domain names include but are not limited to capitaltrademarkets.net), clients, applets and other tools that are developed to offer Capital Trade Markets Services, and includes independently-operated platforms, websites and clients within the ecosystem.</p>
               <p><strong>2. Capital Trade Markets Operators</strong> refer to all parties that run Capital Trade Markets, including but not limited to legal persons, unincorporated organizations and teams that provide Capital Trade Markets Services and are responsible for such services.</p>
               <p><strong>3. Capital Trade Markets Services</strong> refer to various services provided to you by Capital Trade Markets that are based on Internet and/or blockchain technologies and offered via Capital Trade Markets websites, clients and other forms.</p>
               <p><strong>4. Digital Currencies</strong> refer to encrypted or digital tokens or cryptocurrencies with a certain value that are based on blockchain and cryptography technologies and are issued and managed in a decentralized form.</p>
@@ -140,7 +140,7 @@ function Terms() {
               <h2 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: 'var(--text-primary)' }}>III. Services</h2>
             </div>
             
-            <p>Upon completion of registration, you may access Crypto-to-crypto trading, Foreign Exchange, Stock trading, Commodities trading, and ETFs trading. Capital Trade Markets maintains a highly experienced broker assignment system for market calls and placements.</p>
+            <p>Upon completion of registration, you may access Crypto-to-crypto trading, Foreign Exchange, Stock trading, Commodities trading, ETFs trading and Fractionalized Real Estate. Capital Trade Markets maintains a highly experienced broker assignment system for market calls and placements.</p>
             
             <div style={{ marginTop: '2rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
               <div className="stat-card-new glass" style={{ margin: 0 }}>
