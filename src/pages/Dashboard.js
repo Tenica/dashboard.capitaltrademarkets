@@ -135,10 +135,11 @@ const Dashboard = () => {
   const handleApprove = async (actionId, type) => {
     try {
       setLoadingActions(true);
+      let res;
       if (type === 'deposit') {
-        await pendingConfirmationAPI.confirmPendingTransaction(actionId);
+        res = await pendingConfirmationAPI.confirmPendingTransaction(actionId);
       } else {
-        await withdrawalAPI.confirmWithdrawal(actionId);
+        res = await withdrawalAPI.confirmWithdrawal(actionId);
       }
       // Re-fetch all data to update balance, user counts, revenue, etc.
       const msg = res?.data?.message || 'Action approved successfully!';
@@ -154,10 +155,11 @@ const Dashboard = () => {
   const handleReject = async (actionId, type) => {
     try {
       setLoadingActions(true);
+      let res;
       if (type === 'deposit') {
-        await invoiceAPI.cancelInvoice(actionId);
+        res = await invoiceAPI.cancelInvoice(actionId);
       } else {
-        await withdrawalAPI.declineWithdrawal(actionId);
+        res = await withdrawalAPI.declineWithdrawal(actionId);
       }
       // Re-fetch all data to update everything
       const msg = res?.data?.message || 'Action rejected successfully!';
