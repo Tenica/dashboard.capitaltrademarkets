@@ -80,7 +80,7 @@ const Topbar = ({ toggleSidebar, isAdmin, setIsAdmin }) => {
                 <a href="/profile?tab=settings" className="dropdown-item">
                   <Settings size={16} /> <span>Account settings</span>
                 </a>
-                <a href="/support" className="dropdown-item">
+                <a href="mailto:support@capitaltrademarkets.net" className="dropdown-item">
                   <HelpCircle size={16} /> <span>Support</span>
                 </a>
                 <div className="dropdown-divider"></div>

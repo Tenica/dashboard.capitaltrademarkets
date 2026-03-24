@@ -394,8 +394,8 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                     {allWallets.length === 0 ? (
                       <div style={{ padding: '1rem', background: 'rgba(239,68,68,0.05)', border: '1.5px dashed rgba(239,68,68,0.2)', borderRadius: '12px', textAlign: 'center' }}>
                         <p style={{ margin: 0, fontSize: '0.85rem', color: '#fca5a5' }}>
-                          No active payment methods found. 
-                          <br />Please contact support or try again later.
+                          No active funding methods found. 
+                          <br />Please contact support at <strong style={{ color: '#818cf8' }}>support@capitaltrademarkets.net</strong> or try again later.
                         </p>
                       </div>
                     ) : (
