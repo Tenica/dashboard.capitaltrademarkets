@@ -291,7 +291,7 @@ function CreateInvestment() {
                 onClick={handleNextStep}
                 disabled={!selectedPlan || checkingPlans}
               >
-                Next: Select Payment Method
+                Next: Select Funding Method
               </button>
             </div>
           </div>
@@ -300,7 +300,7 @@ function CreateInvestment() {
         {/* Step 2: Select Cryptocurrency */}
         {step === 2 && (
           <div>
-            <h2>Step 2: Select Payment Method</h2>
+            <h2>Step 2: Select Funding Method</h2>
 
             <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#f8f9fc', borderRadius: '0.35rem' }}>
               <p style={{ margin: 0, color: '#5a5c69' }}>
@@ -350,13 +350,13 @@ function CreateInvestment() {
                 onClick={handleNextStep}
                 disabled={!selectedCrypto}
               >
-                Next: Payment Details
+                Next: Funding Details
               </button>
             </div>
           </div>
         )}
 
-        {/* Step 3: Payment Details */}
+        {/* Step 3: Funding Details */}
         {step === 3 && (
           <div>
             <h2>Step 3: Make Payment</h2>

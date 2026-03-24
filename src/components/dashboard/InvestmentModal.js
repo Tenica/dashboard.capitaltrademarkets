@@ -363,7 +363,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                           display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem',
                           boxShadow: isAmountValid ? '0 8px 24px rgba(99,102,241,0.3)' : 'none', transition: 'all 0.2s'
                         }}>
-                        Next: Payment Details <ArrowRight size={17} />
+                        Next: Funding Details <ArrowRight size={17} />
                       </button>
                     </>
                   )}
@@ -390,7 +390,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
 
                   {/* System wallet selector/display */}
                   <div style={{ marginBottom: '1.1rem' }}>
-                    <label style={labels}>Select Payment Method</label>
+                    <label style={labels}>Select Funding Method</label>
                     {allWallets.length === 0 ? (
                       <div style={{ padding: '1rem', background: 'rgba(239,68,68,0.05)', border: '1.5px dashed rgba(239,68,68,0.2)', borderRadius: '12px', textAlign: 'center' }}>
                         <p style={{ margin: 0, fontSize: '0.85rem', color: '#fca5a5' }}>
@@ -444,7 +444,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
 
                   {/* Crypto amount sent */}
                   <div style={{ marginBottom: '1rem' }}>
-                    <label style={labels}>Amount Sent ({selectedWallet?.currency || 'USDT'})</label>
+                    <label style={labels}>Amount Deposited ({selectedWallet?.currency || 'USDT'})</label>
                     <input
                       type="number"
                       value={cryptoAmount}

@@ -141,6 +141,8 @@ const Dashboard = () => {
         await withdrawalAPI.confirmWithdrawal(actionId);
       }
       // Re-fetch all data to update balance, user counts, revenue, etc.
+      const msg = res?.data?.message || 'Action approved successfully!';
+      alert(msg);
       await fetchData();
     } catch (error) {
       console.error('Error approving action:', error);
@@ -158,6 +160,8 @@ const Dashboard = () => {
         await withdrawalAPI.declineWithdrawal(actionId);
       }
       // Re-fetch all data to update everything
+      const msg = res?.data?.message || 'Action rejected successfully!';
+      alert(msg);
       await fetchData();
     } catch (error) {
       console.error('Error rejecting action:', error);
@@ -354,7 +358,7 @@ const Dashboard = () => {
         </div>
 
         {pendingActions.length > 0 ? (
-          <div className="premium-table-container">
+          <div className="premium-table-container" style={{ animation: 'fadeIn 0.4s ease-out' }}>
             <table className="premium-table">
               <thead>
                 <tr>
@@ -412,7 +416,7 @@ const Dashboard = () => {
           </div>
         ) : (
           /* Chart: shown to ALL users when there are no pending actions (or always for non-admins) */
-          <div style={{ height: '420px', borderRadius: '12px', overflow: 'hidden' }}>
+          <div style={{ height: '420px', borderRadius: '12px', overflow: 'hidden', animation: 'fadeIn 0.6s ease-out' }}>
             <iframe
               src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_1&symbol=BINANCE%3ABTCUSDT&interval=D&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=dark&style=1&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=&utm_medium=widget&utm_campaign=chart&utm_term=BINANCE%3ABTCUSDT"
               width="100%"

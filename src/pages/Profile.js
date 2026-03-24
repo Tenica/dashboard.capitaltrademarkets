@@ -182,7 +182,7 @@ function Profile() {
               </div>
               <div>
                 <h2 style={{ margin: '0 0 0.3rem', fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-                  {user?.firstName} {user?.lastName}
+                  {user?.firstName?.charAt(0).toUpperCase() + user?.firstName?.slice(1).toLowerCase()} {user?.lastName?.charAt(0).toUpperCase() + user?.lastName?.slice(1).toLowerCase()}
                 </h2>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                   <Briefcase size={14} /> {user?.isAdmin ? 'Administrator' : 'Premium Investor'}
@@ -211,8 +211,8 @@ function Profile() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem' }}>
             {[
-              { label: 'First Name', value: user?.firstName },
-              { label: 'Last Name', value: user?.lastName },
+              { label: 'First Name', value: user?.firstName?.charAt(0).toUpperCase() + user?.firstName?.slice(1).toLowerCase() },
+              { label: 'Last Name', value: user?.lastName?.charAt(0).toUpperCase() + user?.lastName?.slice(1).toLowerCase() },
               { label: 'Email', value: user?.email },
               { label: 'Country', value: user?.country || '—' },
               { label: 'Account Type', value: user?.isAdmin ? 'Administrator' : 'Investor' },
