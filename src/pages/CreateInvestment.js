@@ -20,7 +20,7 @@ function CreateInvestment() {
   const cryptoOptions = [
     { value: 'BTC', label: 'Bitcoin (BTC)', icon: '₿' },
     { value: 'ETH', label: 'Ethereum (ETH)', icon: 'Ξ' },
-    { value: 'USDT', label: 'Tether (USDT)', icon: '₮' }
+    { value: 'USDT', label: 'USDT (TRC20) - TRON', icon: '₮' }
   ];
 
   useEffect(() => {

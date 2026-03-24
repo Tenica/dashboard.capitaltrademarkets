@@ -340,7 +340,7 @@ function Profile() {
                   <div>
                     <label style={lbl}>Currency *</label>
                     <select value={form.currency} onChange={e => setForm(f => ({ ...f, currency: e.target.value }))} style={{ ...inp(false), cursor: 'pointer', appearance: 'none' }}>
-                      {CURRENCIES.map(c => <option key={c} value={c} style={{ background: '#1e293b' }}>{c}</option>)}
+                      {CURRENCIES.map(c => <option key={c} value={c} style={{ background: '#1e293b' }}>{c === 'USDT' ? 'USDT (TRC20) - TRON' : c}</option>)}
                     </select>
                   </div>
                 </div>
