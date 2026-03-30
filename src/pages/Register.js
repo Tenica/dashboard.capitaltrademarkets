@@ -259,7 +259,7 @@ function Register() {
         </form>
 
         <div className="form-footer" style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-          Part of the collective? <Link to="/login" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Sign In <ArrowRight size={14} style={{ verticalAlign: 'middle' }} /></Link>
+          Already have an account? <Link to="/login" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Sign In <ArrowRight size={14} style={{ verticalAlign: 'middle' }} /></Link>
         </div>
       </div>
     </div>

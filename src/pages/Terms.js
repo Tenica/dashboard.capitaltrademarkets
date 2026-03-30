@@ -4,7 +4,7 @@ import { Shield, ChevronRight, Scale, BookOpen, AlertCircle, CheckCircle, ArrowL
 import '../styles/App.css';
 
 function Terms() {
-  const lastRevised = "16 January, 2021";
+  const lastRevised = "16 January, 2026";
 
   const sections = [
     { id: "definitions", title: "I. Definitions", icon: <BookOpen size={20} /> },
@@ -172,7 +172,7 @@ function Terms() {
           }}>
             <img src="/logo.png" alt="Logo" style={{ maxWidth: '180px', marginBottom: '1.5rem', opacity: 0.6 }} />
             <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              &copy; 2021 Capital Trade Markets Ecosystem. All rights reserved.<br />
+              &copy; 2026 Capital Trade Markets Ecosystem. All rights reserved.<br />
               Continuous use of the platform constitutes agreement to the latest terms.
             </p>
           </div>
