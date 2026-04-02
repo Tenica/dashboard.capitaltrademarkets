@@ -384,7 +384,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                   <div style={{ display: 'flex', gap: '0.7rem', padding: '0.9rem', background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '10px', marginBottom: '1.25rem' }}>
                     <Info size={16} style={{ flexShrink: 0, color: '#10b981', marginTop: '1px' }} />
                     <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1fae5', lineHeight: 1.55 }}>
-                      Deposit <strong>{fmtFull(amount)} USDT (TRC20) - TRON</strong> to the address below, then fill in your crypto amount sent and paste your transaction ID/hash as proof.
+                      <span>Deposit </span><strong>{fmtFull(amount)} <span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span></strong><span> to the address below, then fill in your crypto amount sent and paste your transaction ID/hash as proof.</span>
                     </p>
                   </div>
 
@@ -444,7 +444,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
 
                   {/* Crypto amount sent */}
                   <div style={{ marginBottom: '1rem' }}>
-                    <label style={labels}>Amount Deposited ({selectedWallet?.currency === 'USDT' ? 'USDT (TRC20) - TRON' : (selectedWallet?.currency || 'USDT')})</label>
+                    <label style={labels}><span>Amount Deposited (</span><span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span>)</span></label>
                     <input
                       type="number"
                       value={cryptoAmount}
@@ -454,7 +454,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                     />
                     {errTip(cryptoError)}
                     <p style={{ margin: '0.35rem 0 0', fontSize: '0.74rem', color: '#475569' }}>
-                      Enter the exact amount of {selectedWallet?.currency === 'USDT' ? 'USDT (TRC20) - TRON' : (selectedWallet?.currency || 'USDT')} you transferred.
+                      <span>Enter the exact amount of </span><span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span> you transferred.</span>
                     </p>
                   </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, Eye, EyeOff, Loader2, ShieldCheck } from 'lucide-react';
+import GoogleTranslate from '../components/GoogleTranslate';
 import '../styles/App.css';
 
 function Login() {
@@ -276,6 +277,7 @@ function Login() {
             <div className="form-footer" style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
               New to the platform? <Link to="/register" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Create Account</Link>
             </div>
+            <GoogleTranslate />
           </>
         )}
       </div>

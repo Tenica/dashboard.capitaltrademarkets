@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
 import { User, Mail, Globe, Lock, Eye, EyeOff, ShieldCheck, Loader2, ArrowRight } from 'lucide-react';
+import GoogleTranslate from '../components/GoogleTranslate';
 import '../styles/App.css';
 
 const COUNTRIES = [
@@ -261,6 +262,7 @@ function Register() {
         <div className="form-footer" style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
           Already have an account? <Link to="/login" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Sign In <ArrowRight size={14} style={{ verticalAlign: 'middle' }} /></Link>
         </div>
+        <GoogleTranslate />
       </div>
     </div>
   );
