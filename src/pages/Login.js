@@ -40,7 +40,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched({ email: true, password: true });
-    
+
     if (!validateEmail(email) || !password) {
       setError('Please fix the errors before logging in.');
       return;
@@ -102,11 +102,11 @@ function Login() {
             </div>
             <h2 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Two-Factor Auth</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>Enter the 6-digit code from your authenticator app</p>
-            
+
             {error && requires2Fa && (
-              <div className="error-message" style={{ 
-                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem', 
-                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem', 
+              <div className="error-message" style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem',
+                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem',
                 border: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem'
               }}>
                 <Lock size={16} /> {error}
@@ -129,7 +129,7 @@ function Login() {
                   disabled={loading}
                 />
               </div>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '700', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', cursor: loading ? 'not-allowed' : 'pointer'}} disabled={loading}>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '700', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', cursor: loading ? 'not-allowed' : 'pointer' }} disabled={loading}>
                 {loading ? <Loader2 size={18} className="spinner" /> : null} {loading ? 'Verifying...' : 'Verify Code'}
               </button>
               <button type="button" onClick={() => { setRequires2Fa(false); setTwoFaCode(''); }} style={{ width: '100%', padding: '0.8rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)', fontSize: '0.9rem', cursor: 'pointer', fontWeight: '600' }}>
@@ -141,19 +141,19 @@ function Login() {
           // Standard Login Screen
           <>
             <div className="logo" style={{ marginBottom: '2rem', textAlign: 'center' }}>
-              <img 
-                src="/logo.png" 
-                alt="CapitalTradeMarkets Logo" 
-                style={{ maxWidth: '240px', width: '100%', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }} 
+              <img
+                src="/logo.png"
+                alt="CapitalTradeMarkets Logo"
+                style={{ maxWidth: '240px', width: '100%', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }}
               />
             </div>
 
             <h2 style={{ color: 'var(--text-primary)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.5rem', fontWeight: '800' }}>Welcome Back</h2>
 
             {error && !requires2Fa && (
-              <div className="error-message" style={{ 
-                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem', 
-                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem', 
+              <div className="error-message" style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.75rem',
+                borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem',
                 border: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem'
               }}>
                 <Lock size={16} /> {error}
@@ -194,7 +194,7 @@ function Login() {
 
               <div className="form-group" style={{ marginBottom: '1.5rem' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
-                   <label style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Password</label>
+                  <label style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Password</label>
                 </div>
                 <div style={{ position: 'relative' }}>
                   <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}>
@@ -219,7 +219,7 @@ function Login() {
                     }}
                     disabled={loading}
                   />
-                  <button 
+                  <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     style={{
@@ -254,11 +254,11 @@ function Login() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                style={{ 
-                  width: '100%', 
-                  padding: '1rem', 
-                  borderRadius: '12px', 
-                  fontSize: '1rem', 
+                style={{
+                  width: '100%',
+                  padding: '1rem',
+                  borderRadius: '12px',
+                  fontSize: '1rem',
                   fontWeight: '700',
                   display: 'flex',
                   alignItems: 'center',
@@ -275,7 +275,7 @@ function Login() {
             </form>
 
             <div className="form-footer" style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              New to the platform? <Link to="/register" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Create Account</Link>
+              New here? <Link to="/register" style={{ color: 'var(--accent-primary)', fontWeight: '700', textDecoration: 'none' }}>Create an Account</Link>
             </div>
             <GoogleTranslate />
           </>

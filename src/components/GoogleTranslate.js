@@ -8,7 +8,7 @@ const GoogleTranslate = () => {
       if (window.google && window.google.translate && window.google.translate.TranslateElement) {
         document.getElementById('google_translate_element').innerHTML = '';
         new window.google.translate.TranslateElement(
-          { pageLanguage: 'en', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
+          { pageLanguage: 'en' },
           'google_translate_element'
         );
       }
@@ -21,7 +21,7 @@ const GoogleTranslate = () => {
     
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
-        { pageLanguage: 'en', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
+        { pageLanguage: 'en' },
         'google_translate_element'
       );
     };
