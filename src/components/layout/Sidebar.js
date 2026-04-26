@@ -21,7 +21,9 @@ const Sidebar = ({ isOpen, toggleSidebar, isAdmin }) => {
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <div className="logo-container" style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '1rem 0' }}>
-            <img src="/logo.png" alt="CapitalTradeMarkets Logo" style={{ maxWidth: '180px', width: '100%', height: 'auto', objectFit: 'contain' }} />
+            <a href="https://www.capitaltrademarkets.net/" style={{ display: 'block' }}>
+              <img src="/logo.png" alt="CapitalTradeMarkets Logo" style={{ maxWidth: '180px', width: '100%', height: 'auto', objectFit: 'contain' }} />
+            </a>
           </div>
           <button className="icon-btn d-mobile" onClick={toggleSidebar}>
             <X size={24} />

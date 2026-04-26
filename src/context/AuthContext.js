@@ -46,6 +46,40 @@ export const AuthProvider = ({ children }) => {
     syncAuthState();
   }, []);
 
+  useEffect(() => {
+    let inactivityTimer;
+
+    const handleActivity = () => {
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      
+      // 30 minutes in milliseconds
+      inactivityTimer = setTimeout(() => {
+        if (token) {
+          logout();
+          window.location.href = '/login'; // Force redirect to login page
+        }
+      }, 30 * 60 * 1000);
+    };
+
+    if (token) {
+      handleActivity(); // Initialize the timer
+
+      // Add event listeners for user activity
+      window.addEventListener('mousemove', handleActivity);
+      window.addEventListener('keydown', handleActivity);
+      window.addEventListener('click', handleActivity);
+      window.addEventListener('scroll', handleActivity);
+    }
+
+    return () => {
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      window.removeEventListener('mousemove', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+      window.removeEventListener('click', handleActivity);
+      window.removeEventListener('scroll', handleActivity);
+    };
+  }, [token]);
+
   const login = async (email, password) => {
     try {
       const normalizedEmail = email.trim().toLowerCase();

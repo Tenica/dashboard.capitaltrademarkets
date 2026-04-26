@@ -384,7 +384,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                   <div style={{ display: 'flex', gap: '0.7rem', padding: '0.9rem', background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '10px', marginBottom: '1.25rem' }}>
                     <Info size={16} style={{ flexShrink: 0, color: '#10b981', marginTop: '1px' }} />
                     <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1fae5', lineHeight: 1.55 }}>
-                      <span>Deposit </span><strong>{fmtFull(amount)} <span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span></strong><span> to the address below, then fill in your crypto amount sent and paste your transaction ID/hash as proof.</span>
+                      <span>Deposit </span><strong className="notranslate">{fmtFull(amount)} <span className="notranslate">{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span></strong><span> to the address below, then fill in your crypto amount sent and paste your transaction ID/hash as proof.</span>
                     </p>
                   </div>
 
@@ -412,7 +412,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                               style={{ ...inputBase(false), paddingRight: '2.5rem', cursor: 'pointer', appearance: 'none' }}
                             >
                               {allWallets.map(w => (
-                                <option key={w._id} value={w._id} style={{ background: '#1e293b' }}>
+                                <option key={w._id} value={w._id} style={{ background: '#1e293b' }} className="notranslate">
                                   {w.currency} ({w.network || 'Main Net'}) — {w.label}
                                 </option>
                               ))}
@@ -435,7 +435,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                         {selectedWallet?.network && (
                           <div style={{ fontSize: '0.75rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                             <Info size={12} style={{ color: '#6366f1' }} />
-                            Network: <strong style={{ color: '#818cf8' }}>{selectedWallet.network}</strong>
+                            Network: <strong style={{ color: '#818cf8' }} className="notranslate">{selectedWallet.network}</strong>
                           </div>
                         )}
                       </div>
@@ -444,7 +444,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
 
                   {/* Crypto amount sent */}
                   <div style={{ marginBottom: '1rem' }}>
-                    <label style={labels}><span>Amount Deposited (</span><span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span>)</span></label>
+                    <label style={labels}><span>Amount Deposited (</span><span className="notranslate">{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span>)</span></label>
                     <input
                       type="number"
                       value={cryptoAmount}
@@ -454,7 +454,7 @@ const InvestmentModal = ({ onClose, onSuccess, preselectedPlanName, preselectedA
                     />
                     {errTip(cryptoError)}
                     <p style={{ margin: '0.35rem 0 0', fontSize: '0.74rem', color: '#475569' }}>
-                      <span>Enter the exact amount of </span><span>{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span> you transferred.</span>
+                      <span>Enter the exact amount of </span><span className="notranslate">{selectedWallet ? `${selectedWallet.currency}${selectedWallet.network ? ` (${selectedWallet.network})` : ''}` : 'Crypto'}</span><span> you transferred.</span>
                     </p>
                   </div>
 
