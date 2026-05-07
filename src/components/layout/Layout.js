@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
 
           <main className="content-area" style={{ position: 'relative', minHeight: '85vh', paddingBottom: '4rem' }}>
             {children}
-            <div style={{ position: 'fixed', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', justifyContent: 'center', background: 'rgba(15, 23, 42, 0.8)', padding: '0.4rem 1rem', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+            <div style={{ position: 'absolute', bottom: '10px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: 'flex', justifyContent: 'center', background: 'rgba(15, 23, 42, 0.8)', padding: '0.4rem 1rem', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
               <GoogleTranslate />
             </div>
           </main>

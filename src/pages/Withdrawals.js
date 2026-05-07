@@ -82,15 +82,15 @@ function Withdrawals() {
       let matured = 0;
       const now = new Date();
 
-      const activeInvs = Array.isArray(invs) ? invs.filter(i => i.status?.toLowerCase() === 'active') : [];
+      const activeAndCompletedInvs = Array.isArray(invs) ? invs.filter(i => i.status?.toLowerCase() === 'active' || i.status?.toLowerCase() === 'completed') : [];
 
-      activeInvs.forEach(inv => {
+      activeAndCompletedInvs.forEach(inv => {
         const start = new Date(inv.createdAt);
         const durationDays = parseInt(inv.plan?.endDate || inv.planId?.endDate || 30);
         const maturityDate = new Date(start.getTime() + (durationDays * 24 * 60 * 60 * 1000));
         
         const principal = parseFloat(inv.amount || 0);
-        if (now >= maturityDate) {
+        if (inv.status?.toLowerCase() === 'completed' || now >= maturityDate) {
           matured += principal;
         } else {
           locked += principal;
@@ -101,7 +101,8 @@ function Withdrawals() {
         walletBalance: currentBalance,
         lockedAssets: locked,
         withdrawableAssets: currentBalance + matured,
-        isEligible: (currentBalance + matured) > 0 
+        isEligible: (currentBalance + matured) > 0,
+        maturedAssets: matured
       });
       setInvestments(invs);
     } catch (err) {
@@ -269,16 +270,24 @@ function Withdrawals() {
                 <Lock size={16} /> Awaiting Maturity
               </div>
             ) : (
-              <button 
-                className="btn btn-primary"
-                style={{ 
-                  padding: '0.85rem 1.75rem', borderRadius: '12px', fontWeight: '800', 
-                  background: 'var(--accent-gradient)', border: 'none', display: 'flex', alignItems: 'center', gap: '8px'
-                }}
-                onClick={() => setShowForm(!showForm)}
-              >
-                <ArrowUpRight size={20} /> {showForm ? 'Cancel Request' : 'Liquidate Assets'}
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                {stats.maturedAssets > 0 && !showForm && (
+                  <div style={{ color: '#10b981', fontSize: '0.85rem', fontWeight: '700', animation: 'fadeIn 0.5s ease-out', display: 'flex', alignItems: 'center', gap: '4px', padding: '4px 8px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '6px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                    <CheckCircle size={14} />
+                    Investment completed. Withdrawal is available!
+                  </div>
+                )}
+                <button 
+                  className="btn btn-primary"
+                  style={{ 
+                    padding: '0.85rem 1.75rem', borderRadius: '12px', fontWeight: '800', 
+                    background: 'var(--accent-gradient)', border: 'none', display: 'flex', alignItems: 'center', gap: '8px'
+                  }}
+                  onClick={() => setShowForm(!showForm)}
+                >
+                  <ArrowUpRight size={20} /> {showForm ? 'Cancel Request' : 'Liquidate Assets'}
+                </button>
+              </div>
             )}
           </div>
         )}
